@@ -2,7 +2,6 @@
 #define MESSAGEPROCESSHANDLER_H
 
 #include <QObject>
-#include <QRegularExpression>
 
 class MessageProcessHandler : public QObject
 {
@@ -15,6 +14,7 @@ public:
 
 signals:
     void uniqueIdRegistration( QString uniqueID );
+    void newLobby(QString lobbyID);
 };
 
 #endif // MESSAGEPROCESSHANDLER_H

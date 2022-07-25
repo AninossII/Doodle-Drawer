@@ -2,7 +2,6 @@
 #define MESSAGEPROCESSORHANDLER_H
 
 #include <QObject>
-#include <QRegularExpression>
 
 class MessageProcessorHandler : public QObject
 {
@@ -14,6 +13,8 @@ public slots:
     void processMessage(QString message);
 
 signals:
+    void createGameRequest(QString uniqueID);
+    void joinGameRequest(QString lobbyID, QString uniqueID);
 
 };
 

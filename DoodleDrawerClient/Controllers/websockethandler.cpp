@@ -1,15 +1,13 @@
 #include "websockethandler.h"
 #include <QDebug>
+
 WebSocketHandler::WebSocketHandler(QObject *parent)
     : QObject{parent}
-    , m_clientID( QString() )
 {
     m_webSocket = new QWebSocket();
-    m_messageProcessor = new MessageProcessHandler( this );
 
     connect(m_webSocket, &QWebSocket::connected, this, &WebSocketHandler::onConnected);
     connect(m_webSocket, &QWebSocket::textMessageReceived, this, &WebSocketHandler::onTextMessageReceived);
-    connect(m_messageProcessor, &MessageProcessHandler::uniqueIdRegistration, this, &WebSocketHandler::registerID);
 }
 
 WebSocketHandler::~WebSocketHandler(){
@@ -25,17 +23,17 @@ void WebSocketHandler::connectToServer(QString hostAddress)
 void WebSocketHandler::onConnected()
 {
     qDebug() << "Client App: connection established!";
-    //m_webSocket->sendTextMessage("type:createGame;payload:0;sender:anas");
+	//m_webSocket->sendTextMessage("type:createGame;payload:0;sender:Anas");
 }
 
+// Receiving message from Server
 void WebSocketHandler::onTextMessageReceived(QString message)
 {
     qDebug() << "Client App: Received message " << message;
-    m_messageProcessor->processMessage( message );
+    emit newMessageReadyForProcessing(message);
 }
 
-void WebSocketHandler::registerID(QString id)
+void WebSocketHandler::sendMessageToServer(QString message)
 {
-    m_clientID = id;
-    qDebug() << "Client App: New client id: " + m_clientID;
+    m_webSocket->sendTextMessage(message);
 }

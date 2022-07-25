@@ -12,11 +12,13 @@ class WebSocketHandler : public QObject
 public:
     explicit WebSocketHandler(QObject *parent = nullptr);
     ~WebSocketHandler();
+    void sendTextMessageToClient(QString message, QString clientID);
+
 signals:
     void newMessageToProcess( QString message );
+
 public slots:
     void onNewSocketConnection();
-
     void onTextMessageRecived(QString);
     void onSocketDisconnected();
 

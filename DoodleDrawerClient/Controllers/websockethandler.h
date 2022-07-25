@@ -14,18 +14,19 @@ public:
     ~WebSocketHandler();
 
     Q_INVOKABLE void connectToServer(QString hostAddress);
+    
+    //Q_INVOKABLE void joinGameRequest();
 
 public slots:
     void onConnected();
     void onTextMessageReceived(QString message);
-    void registerID( QString id );
+    void sendMessageToServer(QString message);
 
 signals:
+    void newMessageReadyForProcessing(QString message);
 
 private:
     QWebSocket* m_webSocket;
-    QString m_clientID;
-    MessageProcessHandler* m_messageProcessor;
 };
 
 #endif // WEBSOCKETHANDLER_H

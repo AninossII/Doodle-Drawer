@@ -30,7 +30,7 @@ Item {
         buttonTextPixelSize: 48
         width: 336
         height: 105
-        onButtonClicked:  webSocketHandler.connectToServer("ws://127.0.0.1:9000")
+        onButtonClicked: gameManager.createGameRequest()
     }
 
     GameButton{
@@ -44,7 +44,7 @@ Item {
         buttonTextPixelSize: 48
         width: 336
         height: 105
-        onButtonClicked: console.log("Button Clicked!")
+        onButtonClicked: mainLoader.source = "LobbyScreen.qml"
     }
 
     GameButton{

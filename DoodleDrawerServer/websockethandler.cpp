@@ -23,7 +23,10 @@ WebSocketHandler::~WebSocketHandler()
     m_socketServer->deleteLater();
 }
 
-void WebSocketHandler::onNewSocketConnection(){    
+
+void WebSocketHandler::onNewSocketConnection(){
+
+    // Generate Random Client ID
     default_random_engine generator;
     generator.seed( QDateTime::currentMSecsSinceEpoch() );
 
@@ -34,24 +37,39 @@ void WebSocketHandler::onNewSocketConnection(){
         newClientID = QString::number( idGenerator( generator ) );
     }
 
+    // New Client Functionality 
     auto nextClient= m_socketServer->nextPendingConnection();
     nextClient->setParent(this);
 
     connect(nextClient, &QWebSocket::textMessageReceived, this, &WebSocketHandler::onTextMessageRecived);
     connect(nextClient, &QWebSocket::disconnected, this, &WebSocketHandler::onSocketDisconnected);
 
+    // Sending id to Client App
     nextClient->sendTextMessage("type:uniqueID;payload:"+newClientID);
 
+    // Add the new client to ClientList
     m_clientList[ newClientID ] = nextClient;
     qDebug() << "Server: New client ID: " <<  newClientID << " connected!";
 }
 
+// Receiving message from Client App
 void WebSocketHandler::onTextMessageRecived(QString message)
 {
     qDebug() << "Server: Received new client message:" << message;
     emit newMessageToProcess( message );
 }
 
+// Send text message to Client App
+void WebSocketHandler::sendTextMessageToClient(QString message, QString clientID)
+{
+    if (m_clientList.contains(clientID))
+    {
+        QWebSocket* existingClient = m_clientList[clientID];
+        existingClient->sendTextMessage(message);
+    }
+}
+
+// Deleting client from ClientList
 void WebSocketHandler::onSocketDisconnected()
 {
     auto client = qobject_cast<QWebSocket*>(sender());
@@ -64,10 +82,7 @@ void WebSocketHandler::onSocketDisconnected()
                 m_clientList.remove( id );
                 qDebug() << "Server: Client ID:" << id << " Desconnected!";
                 client->deleteLater();
-
             }
         }
-
     }
-
 }
