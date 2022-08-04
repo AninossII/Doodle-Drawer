@@ -8,7 +8,7 @@ GameManager::GameManager(QObject *parent)
 {
 	m_messageHandler = new MessageProcessHandler(this);
 	connect(m_messageHandler, &MessageProcessHandler::uniqueIdRegistration, this, &GameManager::registerUniqueID);
-	connect(m_messageHandler, &MessageProcessHandler::newLobby, this, &GameManager::setRoomLobbyCode);
+	connect(m_messageHandler, &MessageProcessHandler::newLobby, this, &GameManager::lobbyJoined);
 }
 
 GameManager::~GameManager()

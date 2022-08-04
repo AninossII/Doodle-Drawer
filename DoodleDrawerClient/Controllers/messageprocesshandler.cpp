@@ -36,7 +36,7 @@ void MessageProcessHandler::processMessage(QString message)
 		{
 			QString newLobbyID = separated.first().remove("payload:");
 			qDebug() << "Client App: Lobby ID: " + newLobbyID;
-			emit newLobby( newLobbyID);
+			emit newLobby(newLobbyID);
 		}
 	}
 }

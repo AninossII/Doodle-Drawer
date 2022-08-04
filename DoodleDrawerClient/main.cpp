@@ -28,11 +28,11 @@ int main(int argc, char *argv[])
         if (!obj && url == objUrl)
             QCoreApplication::exit(-1);
     }, Qt::QueuedConnection);
+    
+    QQmlContext* rootContext = engine.rootContext();
+    rootContext->setContextProperty("webSocketHandler", &socketHandler);
+    rootContext->setContextProperty("gameManager", &gameManager);
+
     engine.load(url);
-
-    QQmlContext* context = engine.rootContext();
-    context->setContextProperty("webSocketHandler", &socketHandler);
-    context->setContextProperty("gameManager", &gameManager);
-
     return app.exec();
 }

@@ -8,9 +8,9 @@ Window {
     visible: true
     title: qsTr("DoodleDrawer")
 
-    Connections{
-        target: gameManager
-        onInGameLobby: mainLoader.source = "qrc:/ui/LobbyScreen.qml"
+    Connections {       
+        target: gameManager        
+        onInGameLobby: mainLoader.source = "qrc:/ui/LobbyScreen.qml"      
     }
 
     Loader{

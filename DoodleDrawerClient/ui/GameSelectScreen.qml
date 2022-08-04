@@ -29,7 +29,7 @@ Item {
         buttonText: "Create Game"
         buttonTextPixelSize: 48
         width: 336
-        height: 105
+        height: 105  
         onButtonClicked: gameManager.createGameRequest()
     }
 
