@@ -25,7 +25,6 @@ public slots:
 private:
     QWebSocketServer* m_socketServer;
     QMap<QString, QWebSocket*> m_clientList;
-
 };
 
 #endif // WEBSOCKETHANDLER_H

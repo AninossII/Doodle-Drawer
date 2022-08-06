@@ -88,5 +88,8 @@
     <None Include="ui\LobbyScreen.qml">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="ui\GameTextInput.qml">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

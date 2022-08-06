@@ -44,7 +44,7 @@ Item {
         buttonTextPixelSize: 48
         width: 336
         height: 105
-        onButtonClicked: mainLoader.source = "LobbyScreen.qml"
+        onButtonClicked: console.log("Button Clicked!")
     }
 
     GameButton{

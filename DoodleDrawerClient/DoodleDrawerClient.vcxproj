@@ -221,6 +221,7 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <None Include="ui\GameTextInput.qml" />
     <None Include="ui\GameButton.qml" />
     <None Include="ui\GameSelectScreen.qml" />
     <None Include="ui\LobbyScreen.qml" />

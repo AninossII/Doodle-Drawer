@@ -23,7 +23,7 @@ WebSocketHandler::WebSocketHandler(QObject *parent) : QObject{parent}
 
 WebSocketHandler::~WebSocketHandler()
 {
-    m_socketServer->deleteLater();
+    //m_socketServer->deleteLater();
 }
 
 void WebSocketHandler::onNewSocketConnection()
@@ -89,6 +89,7 @@ void WebSocketHandler::onSocketDisconnected()
                 m_clientList.remove(id);
                 qDebug() << "Server: Client ID:" << id << " Desconnected!";
                 client->deleteLater();
+                break;
             }
         }
     }
