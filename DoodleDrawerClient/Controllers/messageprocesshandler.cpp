@@ -38,8 +38,7 @@ void MessageProcessHandler::processMessage(QString message)
 		if (separated.front().contains("payload:"))
 		{
 			newLobbyID = separated.first().remove("payload:");
-			qDebug() << "Client App: Lobby ID: " + newLobbyID;
-			emit newLobby(newLobbyID);
+			qDebug() << "Client App: Lobby ID: " + newLobbyID;			
 		}
 
 		separated.pop_front();
@@ -49,5 +48,9 @@ void MessageProcessHandler::processMessage(QString message)
 			clients = clients.remove("clientList:");
 			lobbyClients = clients.split(QRegExp(";"));
 		}
+		qDebug() << "Client App: Client in lobby: " << lobbyClients;
+
+		if (newLobbyID != QString() && lobbyClients != QStringList())
+			emit newLobby(newLobbyID, lobbyClients);
 	}
 }

@@ -1,9 +1,10 @@
 #include "gamemanager.h"
 #include <QDebug>
 
-GameManager::GameManager(QObject *parent)
+GameManager::GameManager(QObject* parent)
 	: QObject{ parent }
 	, m_clientID(QString())
+	, m_clientInLobby(QStringList())
 	, m_roomLobbyCode(QString())
 {
 	m_messageHandler = new MessageProcessHandler(this);
@@ -21,6 +22,11 @@ QString GameManager::roomLobbyCode()
 	return m_roomLobbyCode;
 }
 
+QStringList GameManager::clientsInLobby()
+{
+	return m_clientInLobby;
+}
+
 void GameManager::createGameRequest()
 {
 	//"type:createGame;payLoad:0;sender:1111"
@@ -36,6 +42,15 @@ void GameManager::setRoomLobbyCode(QString lobbyCode)
 	}
 }
 
+void GameManager::setClientsInLobby(QStringList clientsList)
+{
+	if(m_clientInLobby != clientsList)
+	{
+		m_clientInLobby = clientsList;
+		emit clientsInLobbyChanged();
+	}
+}
+
 void GameManager::processSocketMessage(QString message)
 {
 	m_messageHandler->processMessage(message);
@@ -47,8 +62,9 @@ void GameManager::registerUniqueID(QString uniqueID)
 	m_clientID = uniqueID;
 }
 
-void GameManager::lobbyJoined(QString lobbyID)
+void GameManager::lobbyJoined(QString lobbyID, QStringList clients)
 {
 	setRoomLobbyCode(lobbyID);
+	setClientsInLobby(clients);
 	emit inGameLobby();
 }

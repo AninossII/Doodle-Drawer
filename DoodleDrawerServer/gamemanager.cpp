@@ -37,7 +37,7 @@ void GameManager::createGameLobbyRequest(QString uniqueID)
     m_gameLobbyMap[newLobbyID] = newGameLobby;
 
     qDebug() << "Server: New game lobby ID: " << newLobbyID << " Created";
-    m_socketHandler->sendTextMessageToClient("type:newLobbyCreated;payload:"+newLobbyID, uniqueID);
+    m_socketHandler->sendTextMessageToClient("type:newLobbyCreated;payload:"+newLobbyID + ";clientList:" + newGameLobby->clientInLobby(), uniqueID);
 }
 
 void GameManager::joinGameLobbyRequest(QString lobbyID, QString uniqueID)
@@ -46,9 +46,9 @@ void GameManager::joinGameLobbyRequest(QString lobbyID, QString uniqueID)
 	{
         GameLobbyHandler* existingLobby = m_gameLobbyMap[lobbyID];
         existingLobby->addClient(uniqueID);
-        m_socketHandler->sendTextMessageToClient("type:joinSuccess;payload:" + lobbyID, uniqueID);
+        m_socketHandler->sendTextMessageToClient("type:joinSuccess;payload:" + lobbyID + ";clientList:" + existingLobby->clientInLobby(), uniqueID);
 	}else
 	{
-        m_socketHandler->sendTextMessageToClient("type:joinError;payload:DNE", uniqueID);
+        m_socketHandler->sendTextMessageToClient("type:joinError;payload:DNE" , uniqueID);
 	}
 }

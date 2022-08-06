@@ -91,5 +91,11 @@
     <None Include="ui\GameTextInput.qml">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="ui\GameTitle.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="ui\JoinLobbyScreen.qml">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

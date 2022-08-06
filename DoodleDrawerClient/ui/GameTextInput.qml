@@ -32,7 +32,7 @@ Rectangle {
             leftMargin: 10
         }
         TextField{     
-            background: backgroundColor      
+            background: Item{ opacity: 0}
             width: parent.width                    
             font.family: textFontFamily
             font.pixelSize: textPixelSize

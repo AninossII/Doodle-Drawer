@@ -9,6 +9,7 @@ class GameLobbyHandler : public QObject
 public:
     explicit GameLobbyHandler(QString lobbyID, QObject *parent);
     void addClient( QString clientID );
+    QString clientInLobby();
 
 signals:
 

@@ -224,6 +224,8 @@
     <None Include="ui\GameTextInput.qml" />
     <None Include="ui\GameButton.qml" />
     <None Include="ui\GameSelectScreen.qml" />
+    <None Include="ui\GameTitle.qml" />
+    <None Include="ui\JoinLobbyScreen.qml" />
     <None Include="ui\LobbyScreen.qml" />
     <None Include="ui\MainMenuScreen.qml" />
     <None Include="main.qml" />

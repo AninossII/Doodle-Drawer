@@ -1,27 +1,31 @@
-import QtQuick 2.0
-import QtQuick.Controls 2.15
+﻿import QtQuick 2.3
 
 Item {
-    id: mainMenuScreen
+    id: joinLobbyScreen
 
-    Rectangle{
+    
+    Rectangle {
         id: background
         anchors.fill: parent
         color: "#23001E"
     }
-
+    
     GameTitle{
         id: titleText
-        textTitle: "Doodle Drawer"
+        textTitle: "Enter Game Code"
     }
-    
+
+    GameTextInput{
+        id: gameLobbyCode 
+    }
+
     GameButton{
         id: playButton
         anchors.centerIn: parent
-        buttonText: "Play"
+        buttonText: "Join Game"
         width: 336
         height: 105
-        onButtonClicked: mainLoader.source = "GameSelectScreen.qml"
+        onButtonClicked: console.log("Join Button Clicked!")
     }
 
     GameButton{
@@ -32,9 +36,12 @@ Item {
             horizontalCenter: parent.horizontalCenter
         }
 
-        buttonText: "Quit"
+        buttonText: "Back"
         width: 336
         height: 105
-        onButtonClicked: Qt.quit()
+        onButtonClicked: console.log("Back Button Clicked!")
     }
+
 }
+
+

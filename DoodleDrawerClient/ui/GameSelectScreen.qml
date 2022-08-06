@@ -9,18 +9,9 @@ Item {
         color: "#23001E"
     }
 
-    Text{
+    GameTitle{
         id: titleText
-        font.pixelSize: 72
-        font.bold: true
-        font.family: "ROBOTO"
-        anchors{
-            top: parent.top
-            topMargin: 40
-            horizontalCenter: parent.horizontalCenter
-        }
-        color: "white"
-        text: "Doodle Drawer"
+        textTitle: "Doodle Drawer"
     }
 
     GameButton{
@@ -44,7 +35,7 @@ Item {
         buttonTextPixelSize: 48
         width: 336
         height: 105
-        onButtonClicked: console.log("Button Clicked!")
+        onButtonClicked: mainLoader.source = "JoinLobbyScreen.qml"
     }
 
     GameButton{

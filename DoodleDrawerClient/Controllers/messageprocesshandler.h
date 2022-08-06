@@ -10,11 +10,11 @@ public:
     explicit MessageProcessHandler(QObject *parent = nullptr);
 
 
-    void processMessage( QString message );
+    void processMessage( QString message);
 
 signals:
     void uniqueIdRegistration( QString uniqueID );
-    void newLobby(QString lobbyID);
+    void newLobby(QString lobbyID, QStringList clients);
 };
 
 #endif // MESSAGEPROCESSHANDLER_H

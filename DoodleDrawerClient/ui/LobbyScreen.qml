@@ -13,19 +13,10 @@ Item {
         color: "#23001E"
     }
 
-    Text{
+    GameTitle{
         id: titleText
-        font.pixelSize: 72
-        font.bold: true
-        font.family: "ROBOTO"
-        anchors{
-            top: parent.top
-            topMargin: 40
-            horizontalCenter: parent.horizontalCenter
-        }
-        color: "white"
-        text: "Lobby code: " + gameManager.roomLobbyCode
-    }
+        textTitle: "Lobby code: " + gameManager.roomLobbyCode
+    }    
     
     Rectangle {
         id: roomLobbyListBackground
@@ -38,9 +29,23 @@ Item {
             left: parent.left
             topMargin: 20
             leftMargin: 40
-        }  
-            
+        }              
     }   
+
+    ListView{
+        id: roomLobbyList
+        model: gameManager.clientsInLobby
+        delegate: Text{
+            text: modelData
+            font.pixelSize: 36
+            font.family: "ROBOTO"
+            font.bold: true
+            color: "#fff"             
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
+        anchors.fill: roomLobbyListBackground               
+    }
+
     Rectangle{
         id: roomLobbyChatBackground
         radius: 5 
