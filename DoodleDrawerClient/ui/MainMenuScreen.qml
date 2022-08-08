@@ -22,7 +22,7 @@ Item {
         width: 336
         height: 105
         onButtonClicked: mainLoader.source = "GameSelectScreen.qml"
-    }
+    } 
 
     GameButton{
         id: quitButton

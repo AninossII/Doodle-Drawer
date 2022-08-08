@@ -7,16 +7,14 @@ Rectangle {
     property string textColor: "#fff"
     property string textFontFamily: "ROBOTO"
     property int textPixelSize: 24
-    property bool textBold: true
-
-    
+    property bool textBold: true   
 
     radius: 5        
     height: 80  
     color: backgroundColor              
     anchors{
-        left: parent.left
         right: sendGameButton.left
+        left: parent.left        
         rightMargin: 20
     }
 
