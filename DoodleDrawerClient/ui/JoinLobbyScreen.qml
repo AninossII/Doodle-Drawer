@@ -49,7 +49,8 @@ Item {
                     rightMargin: 20
                     leftMargin: 20
                 }               
-                TextField{     
+                TextField{  
+                    id: joinLobbyTextInput   
                     background: Item{ opacity: 0}                    
 
                     font.family: "ROBOTO"
@@ -76,7 +77,11 @@ Item {
         width: 336
         height: 105
         buttonTextPixelSize: 60
-        onButtonClicked: console.log("Join Button Clicked!")
+        onButtonClicked: {
+            if(joinLobbyTextInput !== "")
+                gameManager.joinLobbyRequest(joinLobbyTextInput.text)
+            
+        }
     }
 
     GameButton{

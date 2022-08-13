@@ -33,6 +33,12 @@ void GameManager::createGameRequest()
 	emit newMessageReadyToSend("type:createGame;payLoad:0;sender:" + m_clientID);
 }
 
+void GameManager::joinLobbyRequest(QString lobbyID)
+{
+	//type:joinGame;payLoad:4000;sender:5555
+	emit newMessageReadyToSend("type:joinGame;payLoad:" + lobbyID + ";sender:" + m_clientID);
+}
+
 void GameManager::setRoomLobbyCode(QString lobbyCode)
 {
 	if (m_roomLobbyCode != lobbyCode)

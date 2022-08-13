@@ -15,7 +15,7 @@ public:
     void sendTextMessageToClient(QString message, QString clientID);
 
 signals:
-    void newMessageToProcess( QString message );
+    void newMessageToProcess(QString message);
 
 public slots:
     void onNewSocketConnection();
@@ -23,8 +23,8 @@ public slots:
     void onSocketDisconnected();
 
 private:
-    QWebSocketServer* m_socketServer;
-    QMap<QString, QWebSocket*> m_clientList;
+    QWebSocketServer *m_socketServer;
+    QMap<QString, QWebSocket *> m_clientList;
 };
 
 #endif // WEBSOCKETHANDLER_H
