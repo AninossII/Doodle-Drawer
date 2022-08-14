@@ -23,9 +23,9 @@ public slots:
     void joinGameLobbyRequest(QString lobbyID, QString uniqueID);
 
 private:
-    WebSocketHandler* m_socketHandler;
-    MessageProcessorHandler* m_messageProcessHandler;
-    QMap<QString, GameLobbyHandler*> m_gameLobbyMap;
+    WebSocketHandler *m_socketHandler;
+    MessageProcessorHandler *m_messageProcessHandler;
+    QMap<QString, GameLobbyHandler *> m_gameLobbyMap;
 };
 
 #endif // GAMEMANAGER_H

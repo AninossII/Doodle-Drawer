@@ -95,9 +95,7 @@ Item {
 
         GameTextInput{
             id: chatTextInput
-        }       
-        
-        //Ep 17 || 06:14
+        } 
     }
 }
 

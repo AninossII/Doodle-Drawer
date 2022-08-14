@@ -1,15 +1,13 @@
 #include "gamemanager.h"
 #include <QDebug>
 
-GameManager::GameManager(QObject* parent)
-	: QObject{ parent }
-	, m_clientID(QString())
-	, m_clientInLobby(QStringList())
-	, m_roomLobbyCode(QString())
+GameManager::GameManager(QObject *parent)
+	: QObject{parent}, m_clientID(QString()), m_clientInLobby(QStringList()), m_roomLobbyCode(QString())
 {
 	m_messageHandler = new MessageProcessHandler(this);
 	connect(m_messageHandler, &MessageProcessHandler::uniqueIdRegistration, this, &GameManager::registerUniqueID);
 	connect(m_messageHandler, &MessageProcessHandler::newLobby, this, &GameManager::lobbyJoined);
+	connect(m_messageHandler, &MessageProcessHandler::updateClientList, this, &GameManager::setClientsInLobby);
 }
 
 GameManager::~GameManager()
@@ -35,7 +33,7 @@ void GameManager::createGameRequest()
 
 void GameManager::joinLobbyRequest(QString lobbyID)
 {
-	//type:joinGame;payLoad:4000;sender:5555
+	// type:joinGame;payLoad:4000;sender:5555
 	emit newMessageReadyToSend("type:joinGame;payLoad:" + lobbyID + ";sender:" + m_clientID);
 }
 
@@ -50,7 +48,7 @@ void GameManager::setRoomLobbyCode(QString lobbyCode)
 
 void GameManager::setClientsInLobby(QStringList clientsList)
 {
-	if(m_clientInLobby != clientsList)
+	if (m_clientInLobby != clientsList)
 	{
 		m_clientInLobby = clientsList;
 		emit clientsInLobbyChanged();

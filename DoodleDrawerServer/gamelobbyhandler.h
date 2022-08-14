@@ -8,13 +8,14 @@ class GameLobbyHandler : public QObject
     Q_OBJECT
 public:
     explicit GameLobbyHandler(QString lobbyID, QObject *parent);
-    void addClient( QString clientID );
+    void addClient(QString clientID);
     QString clientInLobby();
+    QStringList clientInLobbyList();
 
 signals:
 
 private:
-    QList< QString > m_gameClientList;
+    QList<QString> m_gameClientList;
     QString m_lobbyID;
 };
 

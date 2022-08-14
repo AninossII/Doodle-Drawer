@@ -12,6 +12,7 @@ void MessageProcessHandler::processMessage(QString message)
 	// type:uniqueID;garbage:4444
 	// type:newLobbyCreated;payload:1111;clientList:1111,2222,3333
 	// type:joinSuccess;payload:111;clientList:1111,2222,3333
+	// type:updatedClientList;payload:1111,2222,3333
 
 	QStringList separated = message.split(QRegExp(";"));
 	if (separated.first() == "type:uniqueID")
@@ -38,7 +39,7 @@ void MessageProcessHandler::processMessage(QString message)
 		if (separated.front().contains("payload:"))
 		{
 			newLobbyID = separated.first().remove("payload:");
-			qDebug() << "Client App: Lobby ID: " + newLobbyID;			
+			qDebug() << "Client App: Lobby ID: " + newLobbyID;
 		}
 
 		separated.pop_front();
@@ -46,11 +47,18 @@ void MessageProcessHandler::processMessage(QString message)
 		{
 			QString clients = separated.first();
 			clients = clients.remove("clientList:");
-			lobbyClients = clients.split(QRegExp(";"));
+			lobbyClients = clients.split(QRegExp(","));
 		}
 		qDebug() << "Client App: Client in lobby: " << lobbyClients;
 
 		if (newLobbyID != QString() && lobbyClients != QStringList())
 			emit newLobby(newLobbyID, lobbyClients);
+	}
+	else if (separated.first().contains("type:updatedClientList"))
+	{
+		qDebug() << "Client App: New Client Join Lobby";
+		separated.pop_front();
+		QString payLoad = (separated.front()).remove("payload:");
+		emit updateClientList(payLoad.split(QRegExp(",")));
 	}
 }

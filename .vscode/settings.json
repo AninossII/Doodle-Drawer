@@ -1,0 +1,8 @@
+{
+  "files.associations": {
+    "random": "cpp",
+    "system_error": "cpp",
+    "xstring": "cpp"
+  },
+  "terminal.integrated.allowChords": false
+}

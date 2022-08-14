@@ -1,4 +1,5 @@
 #include "websockethandler.h"
+#include "gamelobbyhandler.h"
 #include <random>
 #include <QDateTime>
 #include <QDebug>
@@ -23,7 +24,7 @@ WebSocketHandler::WebSocketHandler(QObject *parent) : QObject{parent}
 
 WebSocketHandler::~WebSocketHandler()
 {
-    //m_socketServer->deleteLater();
+    // m_socketServer->deleteLater();
 }
 
 void WebSocketHandler::onNewSocketConnection()
@@ -73,6 +74,15 @@ void WebSocketHandler::sendTextMessageToClient(QString message, QString clientID
     }
 }
 
+// Update client list
+void WebSocketHandler::sendTextMessageToClients(QString message, QStringList clientIDs)
+{
+    foreach (const QString clientID, clientIDs)
+    {
+        sendTextMessageToClient(message, clientID);
+    }
+}
+
 // Deleting client from ClientList
 void WebSocketHandler::onSocketDisconnected()
 {
@@ -86,9 +96,9 @@ void WebSocketHandler::onSocketDisconnected()
             if (mapIterator.value() == client)
             {
                 QString id = mapIterator.key();
-                m_clientList.remove(id);
+                m_clientList.remove(id);                
+                client->deleteLater();                
                 qDebug() << "Server: Client ID:" << id << " Desconnected!";
-                client->deleteLater();
                 break;
             }
         }
